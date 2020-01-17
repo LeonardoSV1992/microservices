@@ -1,0 +1,19 @@
+{
+  "name": "asteroids",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Leonardo Salazar",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.1",
+    "bunyan": "^1.8.12",
+    "bunyan-middleware": "^1.0.0",
+    "express": "^4.17.1",
+    "jaeger-client": "^3.17.1",
+    "opentracing": "^0.14.4"
+  }
+}

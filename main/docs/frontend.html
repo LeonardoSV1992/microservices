@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <title>NASA PROJECT</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js" integrity="sha256-chlNFSVx3TdcQ2Xlw7SvnbLAavAQLO0Y/LBiWX04viY=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js" integrity="sha256-S1J4GVHHDMiirir9qsXWc8ZWw74PHHafpsHp5PXtjTs=" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+   
+   <body>
+      <div id = "app" >
+          <div style="background-image: url('https://wallpaperaccess.com/full/875299.jpg');min-height: 100vh;background-size: cover;">
+            <div style="color: white; text-align: center;margin-bottom: 4vh;">
+                Project for Web Services Subject |
+                Made by Leonardo Salazar |
+                Misis IT Student 2020 |
+                3 Microservices such as Front end file, consult image of the Day by Nasa and consult count of asteroids
+            </div>
+            <div style="display: flex;color: white; text-align: center; width: 100%;justify-content: space-around;">
+                <div style=" border-width: 1px;
+                border-color: #0358b2;
+                border-style: dotted;
+                min-width: 50vh;padding: 2vh;max-width: 60vh;">
+                <h5>Microservice Consult Picture of the Day</h5>
+                <button type="button" class="btn btn-primary" :disabled="flagPicObj" @click="getLastPic()">Consult</button>
+                <div v-show="flagPicObj">
+                <div><h6>Results:</h6> </div>
+                <div style="font-size: small;
+                text-align: justify;">
+                    Title: {{lastPicObj.title}}
+                    <br>
+                    Description: {{lastPicObj.explanation}}
+                    <br>
+                    Url: {{lastPicObj.url}}
+                    
+
+                </div>
+            </div>
+            </div>
+                <div style=" border-width: 1px;
+                border-color: #ff0a1c;
+                border-style: dotted;
+                min-width: 50vh;padding: 2vh;">
+            <h5>Microservice Consult Count of Asteroids</h5> 
+            <button type="button" class="btn btn-danger" :disabled="flagAsteroid" @click="getAsteroids()">Consult</button>
+            <div v-show="flagAsteroid">
+            <div><h6>Results:</h6> </div>
+            <div>
+                Near Earth: {{lastAsteroidsStats.near_earth_object_count}}
+                <br>
+                Aprox Total Count: {{lastAsteroidsStats.close_approach_count}}
+                <br>
+                Last Updated: {{lastAsteroidsStats.last_updated}}
+                <br>
+                Source: {{lastAsteroidsStats.source}}
+                <br>
+                Nasa Neo URL:  {{lastAsteroidsStats.nasa_jpl_url}}
+            </div>
+            </div>
+
+            </div>
+            </div>
+        </div>
+      </div>
+
+      <script type = "text/javascript" >
+      var app = new Vue({
+   el: '#app',
+   data: {
+        lastPicObj: {},
+        lastAsteroidsStats: {},
+flagAsteroid: false,
+flagPicObj: false
+   },
+   methods: {
+    getLastPic() {
+               vscope = this;
+                axios.get('http://35.228.176.216/getpic')
+                .then(function (response) {
+                    console.log(response.data);
+                    vscope.lastPicObj = response.data;
+                    vscope.flagPicObj = true;
+                })
+                .catch(function (error) {
+      console.log('Something bad occurred');
+                });
+            },
+            getAsteroids() {
+                vscope = this;
+                axios.get('http://35.228.13.153/asteroids')
+                .then(function (response) {
+                    console.log(response.data);
+                    vscope.lastAsteroidsStats = response.data;
+                    vscope.flagAsteroid = true;
+                })
+                .catch(function (error) {
+                    console.log('Something bad occurred');
+                });
+            }
+        }
+})
+      </script>
+   </body>
+</html>
