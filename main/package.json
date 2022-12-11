@@ -12,7 +12,7 @@
     "axios": "^0.19.1",
     "bunyan": "^1.8.12",
     "bunyan-middleware": "^1.0.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jaeger-client": "^3.17.1",
     "opentracing": "^0.14.4",
     "path": "^0.12.7"
